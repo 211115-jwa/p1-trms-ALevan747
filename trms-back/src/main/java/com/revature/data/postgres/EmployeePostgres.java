@@ -21,7 +21,7 @@ public class EmployeePostgres implements EmployeeDAO {
 		int generatedId=0;
 		try (Connection conn = connUtil.getConnection()) {
 			conn.setAutoCommit(false);
-			String[] keys = {"emp_Id"};
+			String[] keys = {"emp_id"};
 			String sql="insert into employee"
 					+ " (first_name,"
 					+ " last_name,"

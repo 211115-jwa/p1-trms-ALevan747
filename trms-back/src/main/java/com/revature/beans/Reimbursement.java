@@ -3,13 +3,14 @@ package com.revature.beans;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Reimbursement {
 	private int reqId;
 	private Employee requestor;
-	private LocalDate eventDate;
-	private LocalTime eventTime;
+	private CharSequence eventDate;
+	private String eventTime;
 	private String location;
 	private String description;
 	private double cost;
@@ -20,7 +21,7 @@ public class Reimbursement {
 	
 	public Reimbursement() {
 		reqId=0;
-		requestor=null;
+		requestor=new Employee();
 		eventDate=null;
 		eventTime=null;
 		location="";
@@ -49,19 +50,23 @@ public class Reimbursement {
 	}
 
 	public LocalDate getEventDate() {
-		return eventDate;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM--dd");
+		LocalDate fdate = LocalDate.parse(eventDate,formatter);
+		return fdate;
 	}
 
 	public void setEventDate(LocalDate eventDate) {
-		this.eventDate = eventDate;
+		this.eventTime = String.valueOf(eventTime);
 	}
 
 	public LocalTime getEventTime() {
-		return eventTime;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime ftime = LocalTime.parse(eventTime,formatter);
+		return ftime;
 	}
 
 	public void setEventTime(LocalTime eventTime) {
-		this.eventTime = eventTime;
+		this.eventTime = String.valueOf(eventTime);
 	}
 
 	public String getLocation() {

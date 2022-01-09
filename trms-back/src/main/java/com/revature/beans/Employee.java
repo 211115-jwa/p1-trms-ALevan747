@@ -24,6 +24,11 @@ public class Employee {
 		supervisor = new Employee();
 		department = new Department();
 	}
+	
+	public Employee(int id) {
+		super();
+		empId=id;
+	}
 
 	public int getEmpId() {
 		return empId;

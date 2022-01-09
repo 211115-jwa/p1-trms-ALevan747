@@ -4,12 +4,15 @@ import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
 import com.revature.services.EmployeeService;
 import com.revature.services.EmployeeServiceImpl;
+import com.revature.services.RequestReviewService;
+import com.revature.services.RequestReviewServiceImpl;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpCode;
 
 public class RequestsController {
 	private static EmployeeService empServ = new EmployeeServiceImpl();
+	private static RequestReviewService rrServ = new RequestReviewServiceImpl();
 	
 	/**
 	 * Retrieves the submitted reimbursement request from the
@@ -60,6 +63,7 @@ public class RequestsController {
 	 */
 	public static void getRequestsByRequestor(Context ctx) {
 		String requestorIdStr = ctx.pathParam("id");
+		System.out.println("looking up information");
 		
 		try {
 			int requestorId = Integer.valueOf(requestorIdStr);

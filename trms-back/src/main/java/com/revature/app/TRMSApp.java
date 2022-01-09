@@ -22,3 +22,12 @@ public class TRMSApp {
 	}
 
 }
+
+/*	
+Build a front end to complete the MVP that is provided, allowing users to submit and view requests.
+From here, choose at least three features that you want to add to the application based on the
+specifications provided. Use BDD with Cucumber to plan the expected behavior of features, 
+then implement each feature using Agile methodology. Test each feature that you've added 
+with Selenium using your Cucumber feature files.
+	
+	*/

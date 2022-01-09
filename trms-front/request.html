@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" href = "style.css">
+        <title>
+            Reimbursement Request
+        </title>
+    </head>
+    <header style= "font-size:25px; background-color: #333;">
+        <font face="Helvetica">
+      <b style="color:rgb(143, 183, 221)">Reimbursement request page </b>
+        </font>
+    </header>
+    <body style="background-color: rgb(27, 27, 27)">
+        <div class= "topnav">
+            <a class = "active" href = "index.html">Home</a>
+            <a class ="active" href = "request.html">Request Reimbursement</a>
+            <a class ="active" href = "allrequests.html">View All Requests</a>
+        </div>
+        <div class="box-wrapper">
+            <div id="box1">
+                <b>Please enter the following information into the boxes below.</b>
+            </div>
+            <div id="box2">
+                Employee ID number:
+                <input id= "dataInput" placeholder= "Employee ID Number"></input> 
+            </div>
+            <div id="box3">
+                <div id="box4">
+                    First Name:
+                    <input id= "dataInput" placeholder= "First Name"></input>
+                    <p>Last Name
+                       <input id= "dataInput" placeholder= "Last Name"></input>
+                    </p>
+                </div>
+                <div class="middle-column">
+                    <div id="box5">
+                        Box 5
+                    </div>
+                    <div id="box6">
+                        Box 6
+                    </div>
+                    <div id="box7">
+                        Box 7
+                    </div>
+                </div>
+                <div id="box8">
+                    Box 8
+                </div>
+            </div>
+            <button type="button" id="submitbutton" >Submit</button>
+
+        </div>
+        <script src= "JavaScript/setup.js"></script>
+        <script src="request.js"></script>
+    </body>
+    <footer>
+        TRMS service provided by Andre L.
+    </footer>
+</html>
