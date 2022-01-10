@@ -140,10 +140,6 @@ public class RequestReviewServiceTest {
 		doNothing().when(reimDAO).update(mockReimb);
 		rrServ.approveRequest(mockReimb);
 		assertTrue(mockReimb.getStatus().getName().equals("approved"));
-		 
-	
-
-		
 	}
 	
 	@Test
@@ -152,7 +148,6 @@ public class RequestReviewServiceTest {
 		mockReimb.getStatus().setName("approved");
 		doNothing().when(reimDAO).update(mockReimb);
 		rrServ.rejectRequest(mockReimb);
-		assertTrue(mockReimb.getStatus().getName().equals("denied"));
-		 
+		assertTrue(mockReimb.getStatus().getName().equals("denied")); 
 	}	
 }

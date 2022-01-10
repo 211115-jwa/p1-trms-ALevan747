@@ -1,21 +1,22 @@
-// equivalent to pets.js
 
 checkLogin();
 
-document.getElementById(`reqbutton`).onclick = getRequests;
-
+setTimeout(getRequests,3000);
 async function getRequests() {
+    //checkLogin().then(setupNav);
 
-    let userInput = document.getElementById('dataInput').value; 
-    let tokenHeader = {"Token":loggedInPerson.id};
-    let response = await fetch(reqAppUrl + 'requests/requestor/' + userInput, { headers:tokenHeader});
+   let eid = loggedInPerson.empId;
+   console.log(loggedInPerson);
     
+
+   let tokenHeader = {"Token":loggedInPerson.id};
+    let response = await fetch(reqAppUrl + 'requests/requestor/' + eid, { headers:tokenHeader});// fix logic
 
     if (response.status === 200){// || response == '') {
         let requests = await response.json();
         
         console.log(requests);
-      showRequests(requests);
+        showRequests(requests);
 
     }else if(response == ''){
         alert('response is empty');// fix later
@@ -26,21 +27,20 @@ async function getRequests() {
 }
 
 
+
+
 function showRequests(requests) {
+    let tdElements = document.getElementsByTagName('td');
+    for(let td of tdElements){
+        td.innerText = ' ';
+    }
+
     let requestsTable = document.getElementById('allRequests');//all
-   
-
-    let Parent = document.getElementById('allRequests');//// cleared tds
-while (Parent.hasChildNodes()) {
-   Parent.removeChild(Parent.firstChild);
-}
-
-    
-        
-   let i = 0;
+       
+       let i = 0;
+   //for each request
     for (let req of requests) 
     {
-        
         let submitted = requests[i].submittedAt;
         for(let i = 0;i<6;i++){
                 if(submitted[i] < 10){
@@ -59,15 +59,13 @@ while (Parent.hasChildNodes()) {
         let eventDate = (requests[i].eventDate);
         eDate = (eventDate[1] + '/' + eventDate[2] + '/' + eventDate[0]);
         let employees = (requests[i].requestor);
-        console.log(employees);
+       // console.log(employees);
         let rowForRequests = document.createElement('tr');
-        rowForRequests.setAttribute('id','req_row');
-        // for each field in the request (yes, we can iterate through fields)
+        
+      
         for (let field in req) {
            
-        
-                    //
-             if (field == 'requestor'){
+           if (field == 'requestor'){
             let column = document.createElement('td');
             column.innerText = employees.empId;
             rowForRequests.appendChild(column);
@@ -101,10 +99,13 @@ while (Parent.hasChildNodes()) {
                 rowForRequests.appendChild(column);
             }else{
                 let column = document.createElement('td');
-               column.innerText = req[field];
+                column.innerText = req[field];
+                //column.innerText = req[field];
                 rowForRequests.appendChild(column);
+
+             
              }
-            
+           
         }
         i++;
             requestsTable.appendChild(rowForRequests);

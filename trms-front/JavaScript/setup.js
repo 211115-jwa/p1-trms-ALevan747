@@ -1,42 +1,28 @@
 "use strict";
 
-//still need to check
-
-
-// global variables to be referenced in other scripts
 let TRMSUrl = 'http://localhost:8080/';
-let loggedInUser;
+let loggedInPerson;
 
-// async functions implicitly return promises, so you
-// can set a callback function for after the promise/function
-// is resolved. here, i'm having the "setupNav" be called
-// after checkLogin resolves.
 checkLogin().then(setupNav);
 
-// this checks if someone is currently logged in in the
-// browser session (local storage) then retrieves their info
-// before setting up the page
 async function checkLogin() {
-    let userId = localStorage.getItem('Token');
-    if (userId) {
-        let response = await fetch(TRMSUrl + 'users/' + userId + '/auth');
+    let personId = localStorage.getItem('Token');
+    if (personId) {
+        let response = await fetch(TRMSUrl + 'login/' + personId + '/auth');
         if (response.status === 200) {
-            loggedInUser = await response.json();
+            loggedInPerson = await response.json();
         }
     }
 }
 
-// sets up the nav bar that appears on all pages
-// depending on whether the user is logged in and
-// what their role is
 function setupNav() {
     let nav = document.getElementById('nav');
-
-    if (!loggedInUser) {
+    console.log(loggedInPerson);
+    //leave <a href="index.html"></a> to keep View All Reimbur Req centered
+    if (!loggedInPerson) {
         nav.innerHTML = `<span id="navLeft">
         <a href="index.html"></a> 
-        <span>&#128062;</span>
-        <a href="allrequests.html">All Reimbursement Requests</a>
+        <a href="allrequests.html"> View All Reimbursement Requests</a>
         <a hidden>My Requests test</a>
         </span>
         <span id="navRight">
@@ -44,29 +30,26 @@ function setupNav() {
         </span>`;
 
         document.getElementById('login').addEventListener('click',openLogin);
-    } else if (loggedInUser.role.name !== 'Employee') {
+    } else if (loggedInPerson.role.name !== 'Employee') {
         nav.innerHTML = `<span id="navLeft">
-        <a href="index.html"><b>TRMS</b></a>
-        <span>&#128062;</span>
-        <a href="allRequests.html">All Reimbursement Requests</a>
+        <a href="index.html"></a>
+        <a href="allRequests.html">View All Reimbursement Requests</a>
         <a href="myrequests.html">My Requests</a>
         </span>
         <span id="navRight">
-        <a id="manageUser" href="accountmanage.html">${loggedInUser.username}</a>
+        <a id="manageUser" href="accountmanage.html">${loggedInPerson.username}</a>
         <button id="logout">Log Out</button>
         </span>`;
 
         document.getElementById('logout').addEventListener('click',logOut);
     } else {
         nav.innerHTML = `<span id="navLeft">
-        <a href="index.html"><b>PetApp</b></a>
-        <span>&#128062;</span>
+        <a href="index.html"></a>
         <a href="allrequests.html">All Reimbursement Requests</a>
         <a href="myrequests.html">My Requests</a>
-        
         </span>
         <span id="navRight">
-        <a id="manageUser" href="accountmanage.html">${loggedInUser.username}</a>
+        <a id="manageUser" href="accountmanage.html">${loggedInPerson.username}</a>
         <button id="logout">Log Out</button>
         </span>`;
 
@@ -81,15 +64,14 @@ function openLogin() {
     loginPane.id = 'loginPane';
     loginPane.innerHTML = `
         <form class="loginForm" id="loginForm">
-            <h3>Log In</h3>
+            <h3>You need to be Logged In to Access the Tuition Management System</h3>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
             &nbsp;&nbsp;&nbsp;
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
             <button id="loginBtn" type="button">Submit</button>
-        </form>
-    `;
+        </form>`;
     document.getElementsByTagName('main')[0].insertAdjacentElement("beforebegin",loginPane);
 
     document.getElementById('loginBtn').addEventListener('click', submitLogin);
@@ -116,7 +98,7 @@ async function submitLogin() {
         'password':password
     };
 
-    let response = await fetch(TRMSUrl + 'users/auth',{method:'POST',body:JSON.stringify(credentials)});
+    let response = await fetch(TRMSUrl + 'login/auth',{method:'POST',body:JSON.stringify(credentials)});
     if (response.status===200) {
         let token = await response.text();
         localStorage.setItem('Token', token);

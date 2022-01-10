@@ -1,4 +1,9 @@
-/* making a black background color for mnav bar */
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #292827;
+}
+
+/* making a dark grey background color for mnav bar */
 .topnav {
     background-color:  #333;
     overflow: hidden;
@@ -26,7 +31,7 @@
 .main{
     background-color: rgb(66, 66, 66);
     padding: 10px;
-    height: 1195px;
+    height: 1050px;
 }
 
 .main2{
@@ -34,15 +39,13 @@
     margin:10px;
     flex-grow: 2;
     padding: 10px;
-    height: 1075px;
+    height: 995px;
     border: solid 1px rgb(0, 0, 0)
 }
 
-
-
-
 nav a {
-    color:#ff7a1c;
+    color:#007ff7;
+    /*this is for the ALL REIMBURSEMENT Requests link */
 }
 
 nav {
@@ -63,6 +66,36 @@ nav {
     width:33%;
 }
 
+nav, main {
+    margin:.5em;
+    padding: 1em;
+    background-color:#434344;
+}
+
+
+
+table,th,td {
+    font-size:16pt;
+    border:1px solid #007ff7;
+    border-collapse: collapse;
+}
+
+th,td {
+    padding:.5em;
+}
+
+th {
+    border-width: 1px 1px 5px 1px;
+}
+
+tr:nth-child(1) {
+    background-color: #007ff7;
+}
+
+tr:nth-child(even) {
+    background-color: #f81504;
+}
+
 button {
     padding:.5em;
     background-color: #007ff7;
@@ -78,6 +111,12 @@ button:hover {
     color:#ffffcc;
     background-color: #032b99;
     box-shadow: 0px 3px #09005a;
+}
+
+.loginForm {
+    margin:.5em;
+    padding: 1em;
+    background-color:#353532;
 }
 
 
@@ -96,12 +135,14 @@ button:hover {
 }
 
 #box2 {
+    background-color: rgb(78, 78, 78);
     height: 15px;
     padding: 8px;
     border: solid 1px blue
 }
 
 #box3 {
+    background-color: rgb(78, 78, 78);
     padding: 10px;
     flex-grow: 1;
     display: flex;
@@ -110,6 +151,7 @@ button:hover {
 }
 
 #box4 {
+    background-color: rgb(78, 78, 78);
     flex-grow: 2;
     border: solid 1px orange
 }
