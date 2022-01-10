@@ -1,22 +1,16 @@
-//equivalent to mypets.js
-//here processing requests will be handled
-//this will need tweaking to ensure functionality
-//login fuinction needed to ensure the user is logged in to be able to request a reimbursement 
 document.getElementById(`submitbutton`).onclick = submitRequest;
 
 async function submitRequest() {
-
-        
     let etp = document.getElementById("eventtype").value;
     let et = {
         "eventId": etp
     }
     let st = {
-        "statusId": 4,//
-        "name": "Pending Sup",//
-        "approver": "Supervisor"//
+        "statusId": 4,
+        "name": "Pending Sup",
+        "approver": "Supervisor"
     };
-    let gfid =  document.getElementById("gformat").value;//
+    let gfid =  document.getElementById("gformat").value;
     let gf  = {
         "formatId":  gfid
     }
@@ -24,21 +18,11 @@ async function submitRequest() {
     let edate = document.getElementById("eventdate").value;
     let etime = String(document.getElementById("etime").value);
     etime = etime + ":01";
-    let local = document.getElementById("street").value + ", "+
-                document.getElementById("city").value + ", "+
-                document.getElementById("state").value;//
-    let desc = document.getElementById("descBox").value;//
-    let cost = document.getElementById("cost").value;//
     
-    // console.log(etime);
-    // console.log(st);
-    // console.log(gf);
-    // console.log(edate);
     let request = {
         "requestor": loggedInPerson,
         "eventDate": edate,
         "eventTime": etime,
-        "location": local,
         "description": desc,
         "cost": cost,
         "gradingFormat": gf,
@@ -52,18 +36,10 @@ async function submitRequest() {
     }
     else{
 
-       let formatter = new Intl.NumberFormat('en-US', {// currency formatter
+       let formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
           });
-
-
-                    // file attachment needs server??
-       // let file = document.getElementById("file").files[0];
-       // let formData = new FormData();
-     
-       // formData.append("file", file);
-       // fetch('C/Users/cwild/Documents/revature/p1-trms-wilderchris/trms-front/upload', {method: "POST", body: formData});
        
        let tokenHeader = {"Token":loggedInPerson.id};
         let response = await fetch(reqAppUrl + 'requests', {
@@ -93,8 +69,6 @@ async function submitRequest() {
             c = c * .9;
         }else 
             c = c * .3;
-        
-        
         return c;
          }
 

@@ -24,30 +24,56 @@
                 <b>Please enter the following information into the boxes below.</b>
             </div>
             <div id="box2">
-                Employee ID number:
-                <input id= "dataInput" placeholder= "Employee ID Number"></input> 
+               <!--Placeholder for styling purpose, it's easier this way okay-->
             </div>
             <div id="box3">
                 <div id="box4">
                     First Name:
-                    <input id= "dataInput" placeholder= "First Name"></input>
+                    <input id= "dataInput" placeholder= "First Name"></input> 
                     <p>Last Name
-                       <input id= "dataInput" placeholder= "Last Name"></input>
-                    </p>
+                        <input id= "dataInput" placeholder= "Last Name"></input>
+                     </p>
                 </div>
                 <div class="middle-column">
                     <div id="box5">
-                        Box 5
+                        <label for="etime">Event Time:</label>
+                        <input type="time" id="etime" name="edate">
+                        <label for="edate">Event Date:</label>
+                        <input type="date" id="eventdate" name="edate">
                     </div>
                     <div id="box6">
-                        Box 6
+                        <label for="location">Event Location:</label>
+        
+                        <select type="text" id="location" >
+                            <option value="UW">UW</option>
+                            <option value="WSU">WSU</option>
+                            <option value="WWU">WWU</option>
+                            <option value="CWU">CWU</option>
+                            <option value="BC">BC</option>
+                            <option value="PSU">PSU</option>
+                            <option value="TCC">TCC</option>
+                        </select>				
                     </div>
                     <div id="box7">
-                        Box 7
+                        <label for="cost">Cost Paid:</label>
+                        <input type="number" id="cost" placeholder="$">
                     </div>
                 </div>
                 <div id="box8">
-                    Box 8
+                    <label for="rwork">Program:</label>
+                    <select id="eventtype" name="rwork">
+                        <option value="1">Course</option>
+                        <option value="2">Certification Course</option>
+                        <option value="3">Running Start</option>
+                        <option value="4">Other</option>
+                    </select>
+                    <label for="gformat">Preformance Type:</label>
+                    <select id="gformat"  >
+                    <option value="1">Letter</option>
+                    <option value="2">P/NP Pass/NotPass</option>
+                    </select>
+                    <br>
+                    <textarea id="desc" rows="10" cols="50" placeholder="Description"></textarea>
                 </div>
             </div>
             <button type="button" id="submitbutton" >Submit</button>
@@ -57,7 +83,7 @@
             <div class= "main"></div>
         </main>
         <script src= "JavaScript/setup.js"></script>
-        <script src="request.js"></script>
+        <script src="JavaScript/makerequests.js"></script>
     </body>
     <footer>
         TRMS service provided by Andre L.

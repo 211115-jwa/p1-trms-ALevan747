@@ -1,46 +1,32 @@
-// equivalent to pets.js
-
 checkLogin();
-
 document.getElementById(`reqbutton`).onclick = getRequests;
-
 async function getRequests() {
-
     let userInput = document.getElementById('dataInput').value; 
     let tokenHeader = {"Token":loggedInPerson.id};
     let response = await fetch(reqAppUrl + 'requests/requestor/' + userInput, { headers:tokenHeader});
     
-
-    if (response.status === 200){// || response == '') {
-        let requests = await response.json();
-        
+    if (response.status === 200){
+        let requests = await response.json();  
         console.log(requests);
       showRequests(requests);
 
     }else if(response == ''){
-        alert('response is empty');// fix later
+        alert('response is empty');
     
     }else{
     alert('404 Not Found: no Request by ID exists');
     }
 }
 
-
 function showRequests(requests) {
-    let requestsTable = document.getElementById('allRequests');//all
-   
-
-    let Parent = document.getElementById('allRequests');//// cleared tds
+    let requestsTable = document.getElementById('allRequests');
+    let Parent = document.getElementById('allRequests');
 while (Parent.hasChildNodes()) {
    Parent.removeChild(Parent.firstChild);
-}
-
-    
-        
+}  
    let i = 0;
     for (let req of requests) 
     {
-        
         let submitted = requests[i].submittedAt;
         for(let i = 0;i<6;i++){
                 if(submitted[i] < 10){
@@ -62,11 +48,9 @@ while (Parent.hasChildNodes()) {
         console.log(employees);
         let rowForRequests = document.createElement('tr');
         rowForRequests.setAttribute('id','req_row');
-        // for each field in the request (yes, we can iterate through fields)
+
         for (let field in req) {
            
-        
-                    //
              if (field == 'requestor'){
             let column = document.createElement('td');
             column.innerText = employees.empId;
@@ -104,11 +88,8 @@ while (Parent.hasChildNodes()) {
                column.innerText = req[field];
                 rowForRequests.appendChild(column);
              }
-            
         }
         i++;
-            requestsTable.appendChild(rowForRequests);
-         
+            requestsTable.appendChild(rowForRequests); 
     }
-  
 }

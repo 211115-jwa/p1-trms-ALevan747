@@ -1,4 +1,3 @@
-//equivalent to home.js
 //possibly get full name from database? or just use first name
 checkLogin();
 setTimeout(getWelcome,3000);
@@ -10,7 +9,7 @@ function getWelcome(){
         
     openLogin();
 //no full name option avaliable us using first + last name
-//welcoming greeting to logged in user
+
 } else if (loggedInPerson.role.roleId < 11) {
    console.log(loggedInPerson);
    mainDiv.innerHTML = `<h3>Welcome, ${loggedInPerson.firstName + " " + loggedInPerson.lastName + "  "}!</h3>
@@ -30,11 +29,10 @@ function getWelcome(){
         <li>Need to check on your submited reimbursements?Try "View Your Requests".</li>
     </ul>`;
 }
-
 }
 
 async function getEmployees() {
-    let response = await fetch(reqAppUrl + '/employee/');  //requestor/4');
+    let response = await fetch(reqAppUrl + '/employee/'); 
    
     if (response.status === 200) {
         let employees = await response.json();
@@ -43,21 +41,17 @@ async function getEmployees() {
     }
 }
 
-
 function showEmployees(employees) {
-    let employeesTable = document.getElementById('employee');//all
-
+    let employeesTable = document.getElementById('employee');
     
     for (let req of employees) {
         let rowForEmployees = document.createElement('tr');
 
-       
         for (let field in employees) {
             let column = document.createElement('td');
            
             rowForEmployees.appendChild(column);
         }
         employeesTable.appendChild(rowForEmployees);
-     
     }
 }

@@ -1,33 +1,24 @@
-
 checkLogin();
-
 setTimeout(getRequests,3000);
 async function getRequests() {
-    //checkLogin().then(setupNav);
-
    let eid = loggedInPerson.empId;
    console.log(loggedInPerson);
     
-
    let tokenHeader = {"Token":loggedInPerson.id};
-    let response = await fetch(reqAppUrl + 'requests/requestor/' + eid, { headers:tokenHeader});// fix logic
+    let response = await fetch(reqAppUrl + 'requests/requestor/' + eid, { headers:tokenHeader});
 
-    if (response.status === 200){// || response == '') {
+    if (response.status === 200){
         let requests = await response.json();
-        
         console.log(requests);
         showRequests(requests);
 
     }else if(response == ''){
-        alert('response is empty');// fix later
+        alert('response is empty');
     
     }else{
     alert('404 Not Found: no Request by ID exists');
     }
 }
-
-
-
 
 function showRequests(requests) {
     let tdElements = document.getElementsByTagName('td');
@@ -35,10 +26,10 @@ function showRequests(requests) {
         td.innerText = ' ';
     }
 
-    let requestsTable = document.getElementById('allRequests');//all
-       
+    let requestsTable = document.getElementById('allRequests');
+    
        let i = 0;
-   //for each request
+
     for (let req of requests) 
     {
         let submitted = requests[i].submittedAt;
@@ -59,7 +50,6 @@ function showRequests(requests) {
         let eventDate = (requests[i].eventDate);
         eDate = (eventDate[1] + '/' + eventDate[2] + '/' + eventDate[0]);
         let employees = (requests[i].requestor);
-       // console.log(employees);
         let rowForRequests = document.createElement('tr');
         
       
@@ -100,16 +90,11 @@ function showRequests(requests) {
             }else{
                 let column = document.createElement('td');
                 column.innerText = req[field];
-                //column.innerText = req[field];
                 rowForRequests.appendChild(column);
 
-             
              }
-           
         }
         i++;
             requestsTable.appendChild(rowForRequests);
-         
     }
-  
 }

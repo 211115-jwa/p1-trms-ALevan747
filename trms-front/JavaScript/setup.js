@@ -1,5 +1,4 @@
 "use strict";
-
 let TRMSUrl = 'http://localhost:8080/';
 let loggedInPerson;
 
@@ -55,7 +54,6 @@ function setupNav() {
 
         document.getElementById('logout').addEventListener('click',logOut);
     }
-
     closeLogin();
 }
 
