@@ -1,0 +1,168 @@
+--Database for project1
+DROP TABLE IF EXISTS Employees;
+CREATE TABLE IF NOT EXISTS Employees(
+emp_id serial primary key,
+first_name varchar(50) not null,
+last_name varchar(50) not null,
+username varchar(50) unique not null,
+passwd varchar(50) not null,
+role_id int foreign key,
+funds int not null,
+supervisor_id int foreign key,
+dept_id int foreign key
+);
+
+--insert data for employee
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Tony', 'Wetherell', 'twetherell0', 't91CEzLUQE', 1, 52, 1, 1);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Arne', 'Tregensoe', 'atregensoe1', 'hqbY3JbX', 2, 81, 2, 2);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Adey', 'Gerardet', 'agerardet2', 'ix7ShYb9A', 3, 71, 3, 3);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Arlana', 'O''Crotty', 'aocrotty3', '9fD4qmMD0M7', 4, 79, 4, 4);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Rafaellle', 'Sammons', 'rsammons4', 'lmICnGdlo', 5, 83, 5, 5);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Loree', 'Angel', 'langel5', 'qbqtEY2y4zU', 6, 100, 6, 6);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Samara', 'Aglione', 'saglione6', 'IS7K5oewXB', 7, 74, 7, 7);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Leonerd', 'Grimwade', 'lgrimwade7', 'NeXZDj80kAsa', 8, 7, 8, 8);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Rich', 'Suggey', 'rsuggey8', 'mtuITj6', 9, 95, 9, 9);
+insert into Employees (first_name, last_name, username, passwd, role_id, funds, supervisor_id, dept_id) values ('Debby', 'Sket', 'dsket9', 'e4hwNh', 10, 91, 10, 10);
+
+
+drop table if exists Reimbursement;
+create table if not exists Reimbursement(
+req_id serial primary key,
+emp_id INT(255),
+event_date date,
+event_time time,
+location varchar(30),
+description varchar(80),
+cost int,
+grading_format_id int,
+type_id int foreign key,
+status_id int foreign key,
+submitted_at time
+);
+
+--insert data for Reimbursement
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (24, '2/8/2021', '12:51 AM', 'Topiczoom', 'asymmetric', 76, 22, 99, 54, '8:47 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (17, '11/25/2021', '9:01 PM', 'Babbleset', 'Devolved', 61, 63, 15, 62, '2:53 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (71, '8/4/2021', '8:48 AM', 'Kamba', 'Self-enabling', 58, 22, 92, 46, '2:59 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (9, '7/14/2021', '2:24 AM', 'Jazzy', 'Down-sized', 35, 74, 96, 93, '8:31 PM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (21, '8/17/2021', '8:29 AM', 'Quimm', 'Pre-emptive', 17, 8, 45, 99, '5:17 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (71, '5/1/2021', '4:33 PM', 'Rhyloo', 'encryption', 98, 62, 96, 75, '7:44 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (63, '10/25/2021', '9:46 AM', 'Yadel', 'dynamic', 26, 2, 40, 24, '9:01 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (66, '1/17/2021', '1:05 PM', 'Edgepulse', '4th generation', 100, 55, 38, 69, '4:48 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (16, '2/20/2021', '5:34 AM', 'Tagchat', 'knowledge base', 99, 69, 11, 89, '12:28 AM');
+insert into Reimbursement (emp_id, event_date, event_time, location, Description, cost, grading_format_id, type_id, status_id, submitted_at) values (62, '9/10/2021', '2:23 AM', 'Twimbo', 'Programmable', 92, 26, 96, 9, '4:50 PM');
+
+drop table if exists d_Comment;
+create table if not exists d_Comment(
+comment_id serial primary key,
+req_id int,
+approver_id int,
+comment_text varchar(80),
+sent_at time
+);
+
+--insert data for d_Comment
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (79, 69, 'disintermediate', '9:40 AM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (26, 24, 'fault-tolerant', '10:45 AM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (27, 78, 'Open-source', '6:39 AM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (25, 45, 'Sharable', '4:19 PM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (13, 29, 'Grass-roots', '8:05 PM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (19, 25, 'superstructure', '2:07 AM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (84, 15, 'focus group', '12:35 AM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (57, 41, 'functionalities', '5:34 PM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (63, 2, 'Vision-oriented', '2:11 AM');
+insert into d_Comment (req_id, approver_id, comment_text, sent_at) values (85, 76, 'intranet', '5:07 PM');
+
+drop table if exists Department;
+create table if not exists Department(
+dept_id serial primary key,
+dept_name varchar(30) not null,
+dept_head_id int
+);
+
+--insert data for Department
+insert into Department (dept_name, dept_head_id) values ('Training', 73);
+insert into Department (dept_name, dept_head_id) values ('Sales', 89);
+insert into Department (dept_name, dept_head_id) values ('Human Resources', 55);
+insert into Department (dept_name, dept_head_id) values ('Research and Development', 55);
+insert into Department (dept_name, dept_head_id) values ('Services', 96);
+insert into Department (dept_name, dept_head_id) values ('Accounting', 76);
+insert into Department (dept_name, dept_head_id) values ('Training', 60);
+insert into Department (dept_name, dept_head_id) values ('Accounting', 46);
+insert into Department (dept_name, dept_head_id) values ('Legal', 55);
+insert into Department (dept_name, dept_head_id) values ('Engineering', 70);
+
+drop table if exists Event_type;
+create table if not exists Event_type(
+type_id serial primary key,
+type_name varchar(20) not null,
+percent_coverage int
+);
+
+--insert data for Event_type
+insert into Event_type (type_name, percent_coverage) values ('Home', 50);
+insert into Event_type (type_name, percent_coverage) values ('Jewelry', 52);
+insert into Event_type (type_name, percent_coverage) values ('Music', 19);
+insert into Event_type (type_name, percent_coverage) values ('Shoes', 66);
+insert into Event_type (type_name, percent_coverage) values ('Automotive', 60);
+insert into Event_type (type_name, percent_coverage) values ('Movies', 1);
+insert into Event_type (type_name, percent_coverage) values ('Health', 65);
+insert into Event_type (type_name, percent_coverage) values ('Shoes', 29);
+insert into Event_type (type_name, percent_coverage) values ('Health', 77);
+insert into Event_type (type_name, percent_coverage) values ('Garden', 54);
+
+drop table if exists Grading_format;
+create table if not exists Grading_format(
+format_id serial primary key,
+format_name varchar(30) not null,
+example varchar(30)
+);
+
+--insert data for Grading_format
+insert into Grading_format (format_name, example) values ('Sub-Ex', 'Marmota flaviventris');
+insert into Grading_format (format_name, example) values ('Job', 'Crocodylus niloticus');
+insert into Grading_format (format_name, example) values ('Kanlam', 'Sarcorhamphus papa');
+insert into Grading_format (format_name, example) values ('Voyatouch', 'Phoeniconaias minor');
+insert into Grading_format (format_name, example) values ('Viva', 'Larus fuliginosus');
+insert into Grading_format (format_name, example) values ('Otcom', 'Boselaphus tragocamelus');
+insert into Grading_format (format_name, example) values ('Job', 'Agama sp.');
+insert into Grading_format (format_name, example) values ('Tres-Zap', 'Spermophilus lateralis');
+insert into Grading_format (format_name, example) values ('Zamit', 'Acrobates pygmaeus');
+insert into Grading_format (format_name, example) values ('Zamit', 'Lorythaixoides concolor');
+
+drop table if exists Status
+create table if not exists Status(
+status_id serial primary key,
+status_name varchar(30),
+approver varchar(30)
+);
+
+--insert data into Status
+insert into Status (status_name, approver) values ('Andalax', 'Hewet');
+insert into Status (status_name, approver) values ('Bigtax', 'Junette');
+insert into Status (status_name, approver) values ('Subin', 'Leland');
+insert into Status (status_name, approver) values ('Zamit', 'Art');
+insert into Status (status_name, approver) values ('Fix San', 'Martica');
+insert into Status (status_name, approver) values ('Home Ing', 'Guntar');
+insert into Status (status_name, approver) values ('Wrapsafe', 'Susanna');
+insert into Status (status_name, approver) values ('Voltsillam', 'Simeon');
+insert into Status (status_name, approver) values ('Daltfresh', 'Dorian');
+insert into Status (status_name, approver) values ('Alpha', 'Maurizio'); 
+
+drop table if exists User_role
+create table if not exists User_role(
+role_id serial primary key,
+role_name varchar(30) not null
+);
+
+--insert data into User_role
+insert into User_role (role_name) values ('Subcontractor');
+insert into User_role (role_name) values ('Electrician');
+insert into User_role (role_name) values ('Construction Worker');
+insert into User_role (role_name) values ('Architect');
+insert into User_role (role_name) values ('Subcontractor');
+insert into User_role (role_name) values ('Surveyor');
+insert into User_role (role_name) values ('Engineer');
+insert into User_role (role_name) values ('Project Manager');
+insert into User_role (role_name) values ('Subcontractor');
+insert into User_role (role_name) values ('Estimator');
