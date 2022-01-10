@@ -12,7 +12,6 @@ import io.javalin.http.HttpCode;
 
 public class RequestsController {
 	private static EmployeeService empServ = new EmployeeServiceImpl();
-	private static RequestReviewService rrServ = new RequestReviewServiceImpl();
 	
 	/**
 	 * Retrieves the submitted reimbursement request from the

@@ -1,77 +1,87 @@
 package com.revature.app;
 
 import io.javalin.Javalin;
-import io.javalin.plugin.json.JsonMapper;
-
+import io.javalin.http.HttpCode;
 import static io.javalin.apibuilder.ApiBuilder.*;
-import java.io.IOException;
+
+import com.revature.controllers.EmployeesController;
 import com.revature.controllers.RequestsController;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.controllers.LoginController;
+import com.revature.controllers.ReviewsController;
 
 public class TRMSApp {
 
+	/*
+	Use BDD with Cucumber to plan the expected
+	 * behavior of features, then implement each feature using Agile methodology.
+	 * Test each feature that you've added with Selenium using your Cucumber feature
+	 * files.
+	 * 
+	 */
+
 	public static void main(String[] args) {
 		Javalin app = Javalin.create(config -> {
+
 			config.enableCorsForAllOrigins();
-			config.jsonMapper(new JacksonMapper());
 		}).start();
+
+		app.before("/requests/*/*", ctx -> {
+			if (!ctx.method().equals("OPTIONS")) {
+				ctx.header("Access-Control-Allow-Headers", "Token");
+				ctx.header("Access-Control-Expose-Headers", "Token");
+
+				String token = ctx.header("Token");
+				if (token == null)
+					ctx.status(HttpCode.UNAUTHORIZED);
+					ctx.result("  and this");
+			}
+		
+		});
+		
 		
 		app.routes(() -> {
-			path("/requests", () -> {
+
+			path("/requests/", () -> {
 				post(RequestsController::submitReimbursementRequest);
-				path("/requestor/deny/{id}", () -> {
-					put(RequestsController::deny);
+
+				path("pending/{id}", () -> {// requests/pending/id
+					get(ReviewsController::getByApprover);
 				});
-				path("/requestor/approve/{id}", () -> {
-					put(RequestsController::approve);
+				path("approve/{id}", () -> {// request/approve/{id}
+					get(ReviewsController::ApproveRequest);
 				});
-				path("/requestor/{id}", () -> {
+				path("reject/{id}", () -> {// requests/reject/{id}
+					get(ReviewsController::RejectRequest);
+				});
+				path("requestor/{id}", () -> {// /requests/requestor/id
 					get(RequestsController::getRequestsByRequestor);
 				});
 			});
-			path("/requests/manage/{id}", ()->{
-				get(RequestsController::getPendingRequestsByRequestor);
-			});
-			path("/emp/{id}", ()->{
-				get(RequestsController::getEmployeeById);
+
+			
+	
+
+					
+			path("/login", () -> {
+				post(LoginController::register); // register
+				path("/auth", () -> {
+					post(LoginController::logIn); // login
+				});
+				path("/{id}", () -> {
+					get(EmployeesController::viewEmployeeById); // get user by id
+					put(LoginController::updateUser); // update user
+					path("/auth", () -> {
+						get(LoginController::checkLogin); // check login
+					});
+				});
 			});
 		});
 	}
 
 }
 
-class JacksonMapper implements JsonMapper {
-    ObjectMapper om = new ObjectMapper();
 
-    {
-        om.findAndRegisterModules();
-    }
-
-    @Override
-    public String toJsonString(Object obj) {
-        try {
-            return om.writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    @Override
-    public <T> T fromJsonString(String json, Class<T> targetClass) {
-        try {
-            return om.readValue(json, targetClass);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return null;
-    }
-    
-}
-
+	
 /*	
 Build a front end to complete the MVP that is provided, allowing users to submit and view requests.
 From here, choose at least three features that you want to add to the application based on the
